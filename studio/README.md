@@ -20,7 +20,8 @@ and complete MIT notices are preserved in [`dist/licenses/`](dist/licenses/).
   only the cached background; its pattern stays fixed while the fish changes.
 - A soft, rounded ochre field frames the fish against lighter paper, inspired
   by nonflowers. Its size follows the specimen rather than the page width.
-  The main body's centre anchors the painting; PNG exports include the field.
+  The body anchors the vertical alignment; the full head-to-tail outline
+  balances the left and right margins. PNG exports include the field.
 - **New fish** changes proportions and seed, keeping your style and painting
   choices. **Reset** restores the defaults, keeping the current seed.
 - Edit the specimen seed to change random details while keeping proportions.

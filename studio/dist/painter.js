@@ -24,8 +24,8 @@ function excludeHead(x,body){
  const points=body.headCutout;x.moveTo(...points[0]);for(let i=1;i<points.length;i++)x.lineTo(...points[i]);x.closePath();
  x.clip('evenodd');
 }
-// Anchor the composition in the flesh of the fish, independently of its fins
-// and tail. A superellipse gives the wash flatter sides than a true ellipse.
+// Keep the body level vertically, and balance the whole head-to-tail outline
+// horizontally. A superellipse gives the wash flatter sides than an ellipse.
 const backdropPower=3.5,compositions=new WeakMap(),frames=new WeakMap();
 function bodyCentre(points){
  let area=0,x=0,y=0;
@@ -40,8 +40,9 @@ function compositionFor(scene){
  const body=scene.regions.find(r=>r.kind==='body'),b=body?bounds(body.outline):scene.bounds;
  const anchor=body?bodyCentre(body.outline):{x:b.x+b.w/2,y:b.y+b.h/2};
  const lines=[...scene.polylines,...scene.regions.map(r=>r.outline)],padding=Math.max(12,b.h*.16);
- let ry=0,rx=0;
- for(const points of lines)for(const [,y]of points)ry=Math.max(ry,Math.abs(y-anchor.y));
+ let ry=0,rx=0,left=Infinity,right=-Infinity;
+ for(const points of lines)for(const [x,y]of points){left=Math.min(left,x);right=Math.max(right,x);ry=Math.max(ry,Math.abs(y-anchor.y));}
+ anchor.x=(left+right)/2;
  ry+=padding;
  for(const points of lines)for(const [x,y]of points){
   const vertical=Math.abs(y-anchor.y)/ry;

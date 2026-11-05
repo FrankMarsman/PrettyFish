@@ -63,8 +63,9 @@ Requested control values are preserved separately for sharing and the interface.
 - The paper master is generated once with a seed independent of fish anatomy.
   Grain strength interpolates that same master. Neither moving a slider nor
   choosing a new fish reseeds it.
-- The body polygon's area centroid anchors the camera at the centre of the
-  artwork; fin and tail extensions cannot pull that anchor off-centre.
+- The body polygon's area centroid anchors vertical alignment. Horizontal
+  alignment uses the midpoint of all painted outlines and ink points, including
+  the head and full tail, so large tails receive space on the right.
   A superellipse (exponent 3.5) fits all painted outlines and ink points with
   padding based on body height. Its width follows the fish rather than filling
   the page, and its flatter curves reduce empty horizontal space.
