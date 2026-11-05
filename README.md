@@ -18,6 +18,42 @@ browser library and adapts its coloured-ribbon approach to fishdraw's body
 boundaries. It does not generate a second fish, colour an unrelated silhouette,
 or apply an image-generation model.
 
+## Example specimens
+
+[![Twelve painted fish across four palettes](samples/gallery.jpg)](samples/README.md#still-gallery)
+
+[Twelve full-resolution examples and their seeds →](samples/README.md#still-gallery)
+
+## From drawing to painting
+
+![The pipeline: fishdraw generates the drawing, anatomical regions are retained, and nonflowers routines paint the same fish](docs/pipeline.svg)
+
+[![One fish, shown first as a line drawing and then as a painting](samples/drawing-and-painting.jpg)](samples/drawing-and-painting.jpg)
+
+## Animated morphs
+
+Eight painted fish changing shape over a stationary sheet of paper. Each loop
+regenerates and paints 37 shapes, holds both endpoints, then reverses the same
+frames. The drawing seed and style categories stay fixed, following
+[FrankFish's morph approach](https://github.com/FrankMarsman/FrankFish/tree/main/samples).
+
+<p>
+<a href="samples/animations/celadon-layered.gif"><img src="samples/animations/celadon-layered.gif" alt="Celadon layered-scale fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/vermilion-fine.gif"><img src="samples/animations/vermilion-fine.gif" alt="Vermilion fine-scale fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/indigo-crosshatch.gif"><img src="samples/animations/indigo-crosshatch.gif" alt="Indigo crosshatched fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/plum-linear.gif"><img src="samples/animations/plum-linear.gif" alt="Plum linear-scale fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/celadon-fine.gif"><img src="samples/animations/celadon-fine.gif" alt="Celadon fine-scale fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/vermilion-layered.gif"><img src="samples/animations/vermilion-layered.gif" alt="Vermilion layered-scale fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/indigo-linear.gif"><img src="samples/animations/indigo-linear.gif" alt="Indigo linear-scale fish morphing over fixed paper" width="48%"></a>
+<a href="samples/animations/plum-crosshatch.gif"><img src="samples/animations/plum-crosshatch.gif" alt="Plum crosshatched fish morphing over fixed paper" width="48%"></a>
+</p>
+
+The paper is generated once per loop, the pigment noise seed and camera stay
+fixed, and every frame uses one shared GIF palette with dithering off. Decoded
+background pixels and loop seams are checked automatically.
+
+[Animation details, settings and regeneration →](samples/README.md#looped-painted-morphs) · [Verification report](samples/verification.json)
+
 ## Try it
 
 Generate a fish, choose one of four palettes, adjust pigment and paper grain,
@@ -86,6 +122,9 @@ Browser checks also accept `PRETTY_FISH_URL` to test a deployed page.
 | `tests/generator.test.cjs` | Original line-art preservation, seed reproducibility and masks |
 | `tools/browser-check.cjs` | Browser rendering, controls, downloads and responsive checks |
 | `docs/UPSTREAM.md` | Vendored source versions and modifications |
+| `samples/` | Still gallery, animated GIFs, parameters and verification report |
+| `tools/render-samples.cjs` | Recreates repository examples and fixed-paper morphs |
+| `tools/morph.cjs` | Continuous proportions, fixed categories and shared camera |
 
 ## Hosting
 

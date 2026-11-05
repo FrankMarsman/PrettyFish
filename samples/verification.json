@@ -1,0 +1,190 @@
+{
+  "stills": [
+    {
+      "file": "stills/aurelia-elegans.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "36ee55d0029868c99fe0daf67cbfea2054948e79626d486341811e239c039832"
+    },
+    {
+      "file": "stills/nerina-lucens.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "c3c51d50a3ddb3cb21a169cfd7e432671d0c87773ccfd78eefe5c23654856d2d"
+    },
+    {
+      "file": "stills/luminata-aureata.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "a9582e5c43c9c0317f38c503df5662dd33224acb71095fef0107a8b8b3de2d40"
+    },
+    {
+      "file": "stills/pelagia-rosea.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "d6bb299a406f31f29b2b50321bbe82cb45ff3b586d4dd2a5ba53b54d54bf30d4"
+    },
+    {
+      "file": "stills/caerula-argentea.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "4f8ed3889a78ab84a629884e5098fbd9e857136dbc3194a266dd5c837444f89e"
+    },
+    {
+      "file": "stills/florina-viridis.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "4daef00bc58d289fda6db3cbcc561580e30dfd04c5e327f93ffb5073c3064842"
+    },
+    {
+      "file": "stills/velaria-lunaris.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "f80e55b97cfc3664e8d3b6628c9e8a8d237d1c0140fd68353df51a1ccb2a4ac4"
+    },
+    {
+      "file": "stills/mirabilis-picta.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "21738bf0cc8fc7c5f2bebead0c594d78b9ead06152cb03cf9b3c77831a423ae2"
+    },
+    {
+      "file": "stills/corallia-serena.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "3942e9c6fd4bb8af466a3131bffa4735b80c1b4b60ae287365779a2d4756e2e3"
+    },
+    {
+      "file": "stills/silvana-gracilis.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "4f59a8c9ab04c802eb0b8e51c8827d59ef486ebe157407cf00ecfb7fd31e03e1"
+    },
+    {
+      "file": "stills/ondina-florens.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "066433eb2c2b3fea29bab3d3787c1bac733a25367996cd5421ff7af277540d12"
+    },
+    {
+      "file": "stills/rosella-velata.jpg",
+      "size": [
+        1200,
+        720
+      ],
+      "sha256": "622a82eb4ddc6aabdda1680005d65ed16d27519cdf7d5c4ed6b1862c10f1a5a3"
+    }
+  ],
+  "animations": [
+    {
+      "file": "animations/celadon-layered.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 1890057
+    },
+    {
+      "file": "animations/vermilion-fine.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2894704
+    },
+    {
+      "file": "animations/indigo-crosshatch.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2760107
+    },
+    {
+      "file": "animations/plum-linear.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2446742
+    },
+    {
+      "file": "animations/celadon-fine.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2562300
+    },
+    {
+      "file": "animations/vermilion-layered.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2449231
+    },
+    {
+      "file": "animations/indigo-linear.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2303756
+    },
+    {
+      "file": "animations/plum-crosshatch.gif",
+      "frames": 92,
+      "distinctFrames": 37,
+      "durationMs": 4600,
+      "loop": 0,
+      "backgroundMarginsIdenticalInFrames": 92,
+      "firstAndLastFrameIdentical": true,
+      "allGeometryStepsUnique": true,
+      "bytes": 2551437
+    }
+  ]
+}

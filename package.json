@@ -7,7 +7,9 @@
     "dev": "node tools/serve.mjs",
     "test": "node --test tests/*.test.cjs",
     "check": "node --check dist/app.js && node --check dist/paint.js && node --check dist/fish-worker.js && node --check dist/vendor/fishdraw.js && node --check dist/vendor/nonflowers.js",
-    "test:browser": "node tools/browser-check.cjs"
+    "test:browser": "node tools/browser-check.cjs",
+    "render:samples": "node tools/render-samples.cjs",
+    "verify:samples": "python3 tools/verify-samples.py"
   },
   "license": "MIT",
   "devDependencies": {
