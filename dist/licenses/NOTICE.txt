@@ -1,0 +1,13 @@
+Pretty Fish
+
+Fish forms and line work use fishdraw by Lingdong Huang (2021).
+https://github.com/LingDong-/fishdraw
+Full MIT license: fishdraw.txt
+
+Paper, colour and stroke primitives, Perlin noise, and pigment filters are
+extracted and adapted from nonflowers by Lingdong Huang (2018).
+https://github.com/LingDong-/nonflowers
+Full MIT license: nonflowers.txt
+
+Both original copyright and permission notices are included in this directory.
+Pretty Fish's integration and webpage are also released under the MIT license.

@@ -1,0 +1,16 @@
+{
+  "name": "pretty-fish",
+  "version": "1.0.0",
+  "private": true,
+  "description": "One procedural fish, drawn with fishdraw and painted with adapted nonflowers routines.",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "test": "node --test tests/*.test.cjs",
+    "check": "node --check dist/app.js && node --check dist/paint.js && node --check dist/fish-worker.js && node --check dist/vendor/fishdraw.js && node --check dist/vendor/nonflowers.js",
+    "test:browser": "node tools/browser-check.cjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

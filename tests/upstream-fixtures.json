@@ -1,0 +1,17 @@
+[
+  {
+    "seed": "Nerina lucens",
+    "lines": 517,
+    "sha256": "bccc8b5313ca6f2fe596555464331d2e03cf953fc8a2f365fc05a66cb0adf2ab"
+  },
+  {
+    "seed": "Pretty fish",
+    "lines": 842,
+    "sha256": "f8b839b88074f6314c06ec6786b3a5ae085e5a5802c29f77f3535d1825736e92"
+  },
+  {
+    "seed": "1234",
+    "lines": 546,
+    "sha256": "ab9fdbd8df7eac3b03926daae03db5dcdac3b77ae5be6d01a2a35fa4e041d9e2"
+  }
+]

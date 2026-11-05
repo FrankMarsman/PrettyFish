@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <meta name="description" content="One imaginary fish, two ways of seeing. Procedural line drawings meet delicate colour, ink and paper, using LingDong Huang’s fishdraw and nonflowers.">
+  <title>Pretty Fish — a procedural field guide</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main>
+    <nav class="masthead" aria-label="Main navigation">
+      <a class="wordmark" href="./" aria-label="Pretty Fish home"><span class="mark" aria-hidden="true">pf.</span> A PROCEDURAL FIELD GUIDE</a>
+      <a href="https://github.com/FrankMarsman/PrettyFish" target="_blank" rel="noreferrer">View source <span aria-hidden="true">↗</span></a>
+    </nav>
+
+    <header class="intro">
+      <div><p class="eyebrow">STUDIES IN FORM &amp; COLOUR</p><h1>Pretty <em>Fish.</em></h1></div>
+      <p class="intro-note">One imaginary fish.<br>Two ways of seeing.</p>
+    </header>
+
+    <section class="specimen" aria-labelledby="specimen-name">
+      <div class="specimen-bar">
+        <div class="identity"><span class="plate" id="plate">PLATE 001</span><h2 id="specimen-name">Discovering a specimen…</h2></div>
+        <button type="button" class="button primary" id="new-fish"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 7a6.5 6.5 0 1 0 .3 5M16 3v4h-4"/></svg>New fish</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite">Gathering ink and pigment…</p>
+
+      <div class="studies" id="studies" aria-busy="true">
+        <figure class="study">
+          <figcaption class="study-heading"><div><span class="study-number">01</span><h3>The drawing</h3></div><span class="medium">Ink on paper</span></figcaption>
+          <div class="artwork original"><canvas id="line-canvas" width="1200" height="720" role="img" aria-label="Procedurally generated fish in fine black line art">A detailed ink drawing of the current fish.</canvas></div>
+          <div class="study-footer"><a href="https://github.com/LingDong-/fishdraw" target="_blank" rel="noreferrer">fishdraw <span aria-hidden="true">↗</span></a><button class="text-button" type="button" id="download-svg" disabled>Download SVG <span aria-hidden="true">↓</span></button></div>
+        </figure>
+        <figure class="study">
+          <figcaption class="study-heading"><div><span class="study-number">02</span><h3>The painting</h3></div><span class="medium">Pigment, ink &amp; grain</span></figcaption>
+          <div class="artwork painted"><canvas id="paint-canvas" width="1200" height="720" role="img" aria-label="The same fish painted with delicate colour washes and textured pigment">A painted version of the same fish.</canvas></div>
+          <div class="study-footer"><a href="https://github.com/LingDong-/nonflowers" target="_blank" rel="noreferrer">nonflowers <span aria-hidden="true">↗</span></a><button class="text-button" type="button" id="download-png" disabled>Download PNG <span aria-hidden="true">↓</span></button></div>
+        </figure>
+      </div>
+
+      <details class="studio" open>
+        <summary>Atelier <span>Colour &amp; texture</span><span class="disclosure" aria-hidden="true">+</span></summary>
+        <div class="controls">
+          <label class="control palette-control"><span class="control-label">Palette</span><select id="palette"><option value="celadon">Celadon &amp; ochre</option><option value="vermilion">Vermilion &amp; gold</option><option value="indigo">Indigo &amp; pearl</option><option value="plum">Plum &amp; rose</option></select></label>
+          <label class="control"><span class="control-label">Pigment <output id="pigment-value" for="pigment">65%</output></span><input id="pigment" type="range" min="0" max="100" step="5" value="65"></label>
+          <label class="control"><span class="control-label">Paper grain <output id="grain-value" for="grain">45%</output></span><input id="grain" type="range" min="0" max="100" step="5" value="45"></label>
+          <div class="control inspection"><label class="check"><input type="checkbox" id="regions"><span>Show regions</span></label><button type="button" class="text-button" id="share" disabled>Copy specimen link <span aria-hidden="true">↗</span></button></div>
+        </div>
+        <ul class="region-legend" id="region-legend" aria-label="Anatomical region colours" hidden></ul>
+        <details class="seed-settings"><summary>Specimen seed</summary><form id="seed-form"><label for="seed-input">Revisit a fish by its seed</label><div class="seed-row"><input id="seed-input" type="text" maxlength="120" required autocomplete="off" spellcheck="false"><button class="button" type="submit">Draw this fish</button></div></form></details>
+      </details>
+    </section>
+
+    <footer>
+      <div><p class="footer-title">Two algorithms. A shared imagination.</p><p>Forms by <a href="https://github.com/LingDong-/fishdraw" target="_blank" rel="noreferrer">fishdraw</a>. Painting routines adapted from <a href="https://github.com/LingDong-/nonflowers" target="_blank" rel="noreferrer">nonflowers</a>.<br>Both created by <a href="https://lingdong.works/" target="_blank" rel="noreferrer">LingDong Huang</a>, and shared under the <a href="licenses/NOTICE.txt">MIT license</a>.</p></div>
+      <p class="footer-note">No two alike.<br>None found in nature.</p>
+    </footer>
+  </main>
+  <noscript>This field guide needs JavaScript to generate and paint its fish. Please enable JavaScript and reload.</noscript>
+</body>
+</html>
