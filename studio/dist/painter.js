@@ -24,7 +24,21 @@ function excludeHead(x,body){
  const points=body.headCutout;x.moveTo(...points[0]);for(let i=1;i<points.length;i++)x.lineTo(...points[i]);x.closePath();
  x.clip('evenodd');
 }
-export function frameFor(scene,w,h,ratio=1){const b=scene.bounds,s=Math.min((w-60*ratio)/b.w,(h-48*ratio)/b.h);return{s,x:(w-b.w*s)/2-b.x*s,y:(h-b.h*s)/2-b.y*s};}
+export function ovalFor(w,h){return{x:w/2,y:h/2,rx:w*.47,ry:h*.46};}
+const frames=new WeakMap();
+export function frameFor(scene,w,h,ratio=1){
+ let cache=frames.get(scene);if(!cache){cache=new Map();frames.set(scene,cache);}
+ const key=w+'x'+h+':'+ratio;if(cache.has(key))return cache.get(key);
+ const b=scene.bounds,cx=b.x+b.w/2,cy=b.y+b.h/2,oval=ovalFor(w,h);
+ // An ellipse narrows towards its ends. Fit every outline and ink point into
+ // its inner 90%, so tall fins and long tails stay inside the ochre field too.
+ let extent=0;
+ const include=points=>{for(const [x,y]of points)extent=Math.max(extent,Math.hypot((x-cx)/oval.rx,(y-cy)/oval.ry));};
+ for(const points of scene.polylines)include(points);
+ for(const region of scene.regions)include(region.outline);
+ const s=.90/Math.max(extent,1e-6),frame={s,x:oval.x-cx*s,y:oval.y-cy*s};
+ if(cache.size>=2)cache.delete(cache.keys().next().value);cache.set(key,frame);return frame;
+}
 function transform(x,f){x.setTransform(f.s,0,0,f.s,f.x,f.y);}
 
 // The original fade/wispy alpha operations are evaluated once, not once per pixel
@@ -96,10 +110,22 @@ export function createPainter(){
 export function createPaper(){
  const nf=Nonflowers.create('Pretty Fish Studio paper v1');
  const master=nf.paper({col:[1,.985,.94],tex:32,spr:.8}),source=ctx(master).getImageData(0,0,512,512),tile=surface(512,512),tx=ctx(tile),image=tx.createImageData(512,512),base=[255,251,239];
+ // A separate, seeded wash keeps its mottling fixed across every fish and
+ // every grain setting. The light paper's original grain shows through it.
+ const wash=surface(512,512),wx=ctx(wash),colour=wx.createImageData(512,512);
+ for(let i=0;i<colour.data.length;i+=4){
+  const u=i/4%512/511,v=Math.floor(i/4/512)/511,r=Math.hypot((u-.5)*2,(v-.5)*2);
+  const n=nf.noise(u*5,v*5,8),fine=nf.noise(u*24,v*24,9);
+  colour.data[i]=221;colour.data[i+1]=195;colour.data[i+2]=132;
+  colour.data[i+3]=255*(.40+.10*n+.035*fine+.045*Math.min(1,r*r));
+ }
+ wx.putImageData(colour,0,0);
  let last=-1;
  return{draw(target,grain){
   const t=grain/100;
   if(last!==grain){for(let i=0;i<image.data.length;i+=4){for(let j=0;j<3;j++)image.data[i+j]=base[j]+(source.data[i+j]-base[j])*t;image.data[i+3]=255;}tx.putImageData(image,0,0);last=grain;}
   const x=target.getContext('2d',{willReadFrequently:true});x.setTransform(1,0,0,1,0,0);x.drawImage(tile,0,0,target.width,target.height);
+  const oval=ovalFor(target.width,target.height);x.save();x.beginPath();x.ellipse(oval.x,oval.y,oval.rx,oval.ry,0,0,Math.PI*2);x.clip();
+  x.drawImage(wash,oval.x-oval.rx,oval.y-oval.ry,oval.rx*2,oval.ry*2);x.restore();
  }};
 }

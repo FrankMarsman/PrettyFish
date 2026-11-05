@@ -5,12 +5,20 @@
     "updates": 20,
     "displayedFrames": 12,
     "draftFrames": 11,
-    "medianUpdateMs": 34.79999999701977
+    "medianUpdateMs": 39
   },
   "samples": [
     {
       "generationMs": 0,
-      "paintMs": 1.0999999940395355,
+      "paintMs": 1.2999999970197678,
+      "latencyMs": 1.5999999940395355,
+      "quality": "draft",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1,
       "latencyMs": 1.2000000029802322,
       "quality": "final",
       "geometryCached": true,
@@ -18,7 +26,23 @@
     },
     {
       "generationMs": 0,
-      "paintMs": 1.2999999970197678,
+      "paintMs": 1.2000000029802322,
+      "latencyMs": 1.5999999940395355,
+      "quality": "draft",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1,
+      "latencyMs": 1.1000000089406967,
+      "quality": "final",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1.2000000029802322,
       "latencyMs": 1.5,
       "quality": "draft",
       "geometryCached": true,
@@ -26,16 +50,16 @@
     },
     {
       "generationMs": 0,
-      "paintMs": 1.2000000029802322,
-      "latencyMs": 1.2000000029802322,
+      "paintMs": 1.0999999940395355,
+      "latencyMs": 1.5,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 1.2000000029802322,
-      "latencyMs": 1.4000000059604645,
+      "paintMs": 1.0999999940395355,
+      "latencyMs": 1.2999999970197678,
       "quality": "draft",
       "geometryCached": true,
       "mode": "worker"
@@ -50,88 +74,64 @@
     },
     {
       "generationMs": 0,
-      "paintMs": 1.4000000059604645,
-      "latencyMs": 1.7000000029802322,
-      "quality": "draft",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 1.4000000059604645,
-      "latencyMs": 1.7000000029802322,
+      "paintMs": 5.700000002980232,
+      "latencyMs": 9,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 1,
-      "latencyMs": 1.300000011920929,
-      "quality": "draft",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 1,
-      "latencyMs": 1.2000000029802322,
+      "paintMs": 1.2999999970197678,
+      "latencyMs": 2.4000000059604645,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
-      "generationMs": 0,
-      "paintMs": 4.200000002980232,
-      "latencyMs": 8.200000002980232,
-      "quality": "final",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 1.300000011920929,
-      "latencyMs": 2.5999999940395355,
-      "quality": "final",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 16.69999998807907,
-      "paintMs": 4.100000008940697,
-      "latencyMs": 21.200000002980232,
+      "generationMs": 40.099999994039536,
+      "paintMs": 7.5,
+      "latencyMs": 47.8999999910593,
       "quality": "final",
       "geometryCached": false,
       "mode": "worker"
     },
     {
-      "generationMs": 29.099999994039536,
-      "paintMs": 4.9000000059604645,
-      "latencyMs": 34.29999999701977,
+      "generationMs": 35.3999999910593,
+      "paintMs": 5.700000002980232,
+      "latencyMs": 41.19999998807907,
       "quality": "final",
       "geometryCached": false,
       "mode": "worker"
     },
     {
-      "generationMs": 30.799999997019768,
-      "paintMs": 5.200000002980232,
-      "latencyMs": 36.29999999701977,
+      "generationMs": 30.599999994039536,
+      "paintMs": 5.9000000059604645,
+      "latencyMs": 37,
       "quality": "final",
       "geometryCached": false,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 5.5999999940395355,
-      "latencyMs": 6.4000000059604645,
+      "paintMs": 7.700000002980232,
+      "latencyMs": 10.5,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 7,
-      "latencyMs": 7.9000000059604645,
+      "paintMs": 8.699999988079071,
+      "latencyMs": 12.299999997019768,
+      "quality": "final",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 8.099999994039536,
+      "latencyMs": 9,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"

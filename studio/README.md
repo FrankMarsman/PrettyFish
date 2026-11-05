@@ -18,6 +18,8 @@ and complete MIT notices are preserved in [`dist/licenses/`](dist/licenses/).
   remains visible as you scroll through the controls.
 - Adjust palette and pigment without regenerating anatomy. Paper grain changes
   only the cached background; its pattern stays fixed while the fish changes.
+- A warm ochre oval frames the fish against lighter paper, inspired by
+  nonflowers. Fit keeps the entire specimen inside it; PNG exports include it.
 - **New fish** changes proportions and seed, keeping your style and painting
   choices. **Reset** restores the defaults, keeping the current seed.
 - Edit the specimen seed to change random details while keeping proportions.
@@ -62,7 +64,7 @@ pigment transparency and paper each have separate caches.
 Local Apple M1 / Node.js 24.1.0 measurements gave **12–15× faster geometry** than
 the original generator across the four scale styles, with matching polylines.
 The final browser drag check displayed **12 frames from 20 input events**,
-with a **34.8 ms median dispatch-to-display time**. Queue wait and
+with a **39.0 ms median dispatch-to-display time**. Queue wait and
 the final-render debounce are excluded. Performance varies by fish and device.
 
 [Generation measurements](docs/generation-performance.json) ·

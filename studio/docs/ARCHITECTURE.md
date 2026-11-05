@@ -18,7 +18,7 @@ flowchart TD
   D --> E[Nonflowers washes and tapered ink]
   F[Palette + pigment] --> E
   E --> G[Painted fish bitmap]
-  H[Cached paper + grain strength] --> I[Painted preview and PNG]
+  H[Cached paper + ochre oval + grain strength] --> I[Painted preview and PNG]
   G --> I
 ```
 
@@ -63,6 +63,11 @@ Requested control values are preserved separately for sharing and the interface.
 - The paper master is generated once with a seed independent of fish anatomy.
   Grain strength interpolates that same master. Neither moving a slider nor
   choosing a new fish reseeds it.
+- A separate seeded ochre wash is clipped to a centered oval over that light
+  paper. Its soft colour variation stays fixed as anatomy or grain changes.
+  The camera fits every painted outline and ink point within the inner 90%
+  of the oval, leaving room around fins and tails at Fit. Framing is cached
+  for draft and final sizes. The background remains fixed during zoom/pan.
 - Zoom and panning are presentation transforms, so they do not regenerate a fish.
   PNG export composites the same paper, fish and view transform.
 
