@@ -4,9 +4,9 @@ import {createPaper,createPainter} from './painter.js';
 const $=id=>document.getElementById(id),nodes=new Map();
 const query=new URLSearchParams(location.search),saved=decodeState(query.get('s'));
 const state=saved||{seed:(query.get('seed')||'Aurelia elegans-e11143').trim().slice(0,120),params:null,appearance:appearance(Object.fromEntries(query))};
-const paperCanvas=$('paper-canvas'),fishCanvas=$('fish-canvas'),artboard=$('artboard'),fishView=$('fish-view');
+const paperCanvas=$('paper-canvas'),backdropCanvas=$('backdrop-canvas'),fishCanvas=$('fish-canvas'),artboard=$('artboard'),fishView=$('fish-view');
 let revision=0,epoch=0,nextId=0,inFlight=null,pending=null,settleTimer=null,urlTimer=null,paperRAF=null,worker=null,paramsRequest=0,loadingParams=false;
-let layout={width:0,height:0,displayWidth:0,key:''},lastRender=null,lastQuality='',mainPainter=null,mainScene=null,mainSceneKey='',paper=null,zoom=1,pan={x:0,y:0},drag=null;
+let layout={width:0,height:0,displayWidth:0,key:''},lastRender=null,lastQuality='',backdropKey='',mainPainter=null,mainScene=null,mainSceneKey='',paper=null,zoom=1,pan={x:0,y:0},drag=null;
 const metrics=[],renderInWorker=typeof OffscreenCanvas==='function';
 const format=n=>Number.isInteger(n)?String(n):Number(n.toFixed(2)).toString();
 function tell(message,error=false){$('notice').textContent=message;$('notice').classList.toggle('error',error);}
@@ -19,7 +19,7 @@ function fit(){zoom=1;pan={x:0,y:0};view();}
 function renderPaper(){paperRAF=null;if(!paper||!layout.width)return;paper.draw(paperCanvas,state.appearance.grain);paperCanvas.dataset.grain=String(state.appearance.grain);}
 function queuePaper(){if(paperRAF===null)paperRAF=requestAnimationFrame(renderPaper);}
 function resize(){const rect=artboard.getBoundingClientRect();if(rect.width<1||rect.height<1)return;const width=Math.min(1800,Math.max(800,Math.round(rect.width*Math.min(2,Math.max(1.5,devicePixelRatio||1))))),height=Math.round(width*rect.height/rect.width),key=width+'x'+height;
- if(key===layout.key)return;layout={width,height,displayWidth:rect.width,key};paperCanvas.width=fishCanvas.width=width;paperCanvas.height=fishCanvas.height=height;renderPaper();if(state.params)requestRender('final');}
+ if(key===layout.key)return;layout={width,height,displayWidth:rect.width,key};paperCanvas.width=backdropCanvas.width=fishCanvas.width=width;paperCanvas.height=backdropCanvas.height=fishCanvas.height=height;backdropKey='';renderPaper();if(state.params)requestRender('final');}
 function disabledDetails(){const active={teeth_length:!!state.params?.has_teeth,teeth_space:!!state.params?.has_teeth,moustache_length:!!state.params?.has_moustache,beard_length:!!state.params?.has_beard,pattern_scale:!!state.params&&state.params.pattern_type!==0};
  for(const [key,on]of Object.entries(active)){const n=nodes.get(key);n.field.classList.toggle('is-inactive',!on);for(const el of n.field.querySelectorAll('input,button,select'))el.disabled=!on||loadingParams;if(on&&n.kind==='range'){const c=controls.find(c=>c.key===key),index=c.values.indexOf(state.params?.[c.key]);n.less.disabled=loadingParams||index<=0;n.more.disabled=loadingParams||index>=c.values.length-1;}}}
 function syncField(c){const n=nodes.get(c.key),value=state.params?.[c.key]??c.values[0],index=c.values.indexOf(value);n.output.value=c.options?c.options[value]:format(value);
@@ -70,10 +70,11 @@ function receive(data){
  if(data.action==='params'){
   if(data.id===paramsRequest){state.params=normaliseParams(data.params);if(job.preserve&&job.previous)for(const c of controls)if(c.options)state.params[c.key]=job.previous[c.key];loadingParams=false;revision++;for(const n of nodes.values())for(const e of n.field.querySelectorAll('input,select,button'))e.disabled=false;syncAll();requestRender('final');}
  }else if(job.epoch===epoch&&job.layoutKey===layout.key){
-  let canvas=data.bitmap,paintMs=data.paintMs;
-  if(data.mode==='main'){mainPainter??=createPainter();if(mainSceneKey!==data.key){mainScene=data.scene;mainSceneKey=data.key;}const result=mainPainter.render(mainScene,job.appearance,job.width,job.height,job.pixelRatio);canvas=result.canvas;paintMs=result.paintMs;}
+  let canvas=data.bitmap,backdrop=data.backdrop,paintMs=data.paintMs;
+  if(data.mode==='main'){mainPainter??=createPainter();if(mainSceneKey!==data.key){mainScene=data.scene;mainSceneKey=data.key;}const result=mainPainter.render(mainScene,job.appearance,job.width,job.height,job.pixelRatio);canvas=result.canvas;backdrop=result.backdrop;paintMs=result.paintMs;}
+  const nextBackdropKey=JSON.stringify(backdrop);if(backdropKey!==nextBackdropKey){paper.drawBackdrop(backdropCanvas,backdrop);backdropKey=nextBackdropKey;}
   const x=fishCanvas.getContext('2d',{willReadFrequently:true});x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,fishCanvas.width,fishCanvas.height);x.drawImage(canvas,0,0,fishCanvas.width,fishCanvas.height);data.bitmap?.close();
-  lastQuality=job.quality;lastRender={id:job.id,revision:job.revision,quality:job.quality,seed:job.seed,params:data.params,appearance:job.appearance,generationMs:data.generationMs,paintMs,totalMs:data.totalMs,latencyMs:performance.now()-job.sentAt,geometryCached:data.geometryCached,inkCached:data.inkCached,mode:data.mode,engine:data.engine};
+  lastQuality=job.quality;lastRender={id:job.id,revision:job.revision,quality:job.quality,seed:job.seed,params:data.params,appearance:job.appearance,backdrop,generationMs:data.generationMs,paintMs,totalMs:data.totalMs,latencyMs:performance.now()-job.sentAt,geometryCached:data.geometryCached,inkCached:data.inkCached,mode:data.mode,engine:data.engine};
   metrics.push(lastRender);if(metrics.length>200)metrics.shift();
   const name=job.seed.replace(/-[a-f0-9]{6}$/i,'');$('painting-title').textContent=name;artboard.setAttribute('aria-label',`Painted ${name}, in the ${job.appearance.palette} palette, on textured paper`);
   fishCanvas.dataset.revision=job.revision;fishCanvas.dataset.quality=job.quality;fishCanvas.dataset.seed=job.seed;fishCanvas.dataset.engine=data.engine;fishCanvas.dataset.layout=job.layoutKey;
@@ -85,7 +86,7 @@ function receive(data){
 }
 function createWorker(){worker?.terminate();worker=new Worker(new URL('./render-worker.js',import.meta.url),{type:'module'});worker.onmessage=({data})=>receive(data);worker.onerror=error=>{inFlight=null;pending=null;loadingParams=false;clearTimeout(settleTimer);settleTimer=null;tell('The painting engine could not load. Reload the page to try again.',true);$('render-status').textContent='Unable to load';updateButtons();console.error(error.message);};}
 function download(){if(!lastRender||$('download').disabled)return;if(paperRAF!==null){cancelAnimationFrame(paperRAF);renderPaper();}
- const c=document.createElement('canvas');c.width=paperCanvas.width;c.height=paperCanvas.height;const x=c.getContext('2d');x.drawImage(paperCanvas,0,0);x.globalCompositeOperation='multiply';const ratio=c.width/layout.displayWidth;x.translate(c.width/2+pan.x*ratio,c.height/2+pan.y*ratio);x.scale(zoom,zoom);x.translate(-c.width/2,-c.height/2);x.drawImage(fishCanvas,0,0);
+ const c=document.createElement('canvas');c.width=paperCanvas.width;c.height=paperCanvas.height;const x=c.getContext('2d');x.drawImage(paperCanvas,0,0);x.drawImage(backdropCanvas,0,0);x.globalCompositeOperation='multiply';const ratio=c.width/layout.displayWidth;x.translate(c.width/2+pan.x*ratio,c.height/2+pan.y*ratio);x.scale(zoom,zoom);x.translate(-c.width/2,-c.height/2);x.drawImage(fishCanvas,0,0);
  c.toBlob(blob=>{if(!blob){tell('The image could not be saved. Please try again.',true);return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=(state.seed.replace(/[^a-z0-9]+/gi,'-').toLowerCase()||'pretty-fish')+'-'+state.appearance.palette+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);},'image/png');
 }
 buildControls();createWorker();paper=createPaper();syncAll();new ResizeObserver(resize).observe(artboard);resize();

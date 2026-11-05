@@ -1,0 +1,13 @@
+{
+  "seed": "Rosella picta-c1f0c4",
+  "shape": "Superellipse, exponent 3.5, centred on body polygon area centroid",
+  "sizes": 20,
+  "paintedPixelsOutsideField": 0,
+  "maxBodyCentreErrorPixels": 1.8198773652309366e-13,
+  "anchorUnchangedWithFinAndTailEdits": true,
+  "overlappingWashPixelsChecked": 293505,
+  "overlappingWashPixelsChanged": 0,
+  "pngPixelsDifferingFromPreview": 0,
+  "widthFraction": 0.5627279001649212,
+  "previousWidthFraction": 0.94
+}

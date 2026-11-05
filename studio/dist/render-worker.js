@@ -17,7 +17,7 @@ self.onmessage=({data})=>{
    painter??=createPainter();
    const result=painter.render(scene,data.appearance,data.width,data.height,data.pixelRatio);
    const bitmap=result.canvas.transferToImageBitmap();
-   postMessage({...common,mode:'worker',bitmap,paintMs:result.paintMs,inkCached:result.inkCached,totalMs:performance.now()-started},[bitmap]);
+   postMessage({...common,mode:'worker',bitmap,backdrop:result.backdrop,paintMs:result.paintMs,inkCached:result.inkCached,totalMs:performance.now()-started},[bitmap]);
   }else postMessage({...common,mode:'main',scene,totalMs:performance.now()-started});
  }catch(error){postMessage({id:data.id,revision:data.revision,error:error.message||String(error)});}
 };

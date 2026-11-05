@@ -10,7 +10,7 @@ export function surface(w,h){
  const c=document.createElement('canvas');c.width=w;c.height=h;return c;
 }
 function ctx(c){return c.getContext('2d');}
-function reset(c,w,h){if(c.width!==w)c.width=w;if(c.height!==h)c.height=h;const x=ctx(c);x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.clearRect(0,0,w,h);return x;}
+function reset(c,w,h,options){if(c.width!==w)c.width=w;if(c.height!==h)c.height=h;const x=c.getContext('2d',options);x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.clearRect(0,0,w,h);return x;}
 const mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
 const clamp=v=>Math.max(0,Math.min(1,v));
 function path(x,points){x.beginPath();if(!points.length)return;x.moveTo(...points[0]);for(let i=1;i<points.length;i++)x.lineTo(...points[i]);x.closePath();}
@@ -24,19 +24,37 @@ function excludeHead(x,body){
  const points=body.headCutout;x.moveTo(...points[0]);for(let i=1;i<points.length;i++)x.lineTo(...points[i]);x.closePath();
  x.clip('evenodd');
 }
-export function ovalFor(w,h){return{x:w/2,y:h/2,rx:w*.47,ry:h*.46};}
-const frames=new WeakMap();
+// Anchor the composition in the flesh of the fish, independently of its fins
+// and tail. A superellipse gives the wash flatter sides than a true ellipse.
+const backdropPower=3.5,compositions=new WeakMap(),frames=new WeakMap();
+function bodyCentre(points){
+ let area=0,x=0,y=0;
+ for(let i=0,j=points.length-1;i<points.length;j=i++){
+  const a=points[j],b=points[i],cross=a[0]*b[1]-b[0]*a[1];area+=cross;x+=(a[0]+b[0])*cross;y+=(a[1]+b[1])*cross;
+ }
+ if(Math.abs(area)>1e-6)return{x:x/(3*area),y:y/(3*area)};
+ const b=bounds(points);return{x:b.x+b.w/2,y:b.y+b.h/2};
+}
+function compositionFor(scene){
+ if(compositions.has(scene))return compositions.get(scene);
+ const body=scene.regions.find(r=>r.kind==='body'),b=body?bounds(body.outline):scene.bounds;
+ const anchor=body?bodyCentre(body.outline):{x:b.x+b.w/2,y:b.y+b.h/2};
+ const lines=[...scene.polylines,...scene.regions.map(r=>r.outline)],padding=Math.max(12,b.h*.16);
+ let ry=0,rx=0;
+ for(const points of lines)for(const [,y]of points)ry=Math.max(ry,Math.abs(y-anchor.y));
+ ry+=padding;
+ for(const points of lines)for(const [x,y]of points){
+  const vertical=Math.abs(y-anchor.y)/ry;
+  rx=Math.max(rx,Math.abs(x-anchor.x)/Math.pow(1-Math.pow(vertical,backdropPower),1/backdropPower));
+ }
+ const composition={anchor,rx:rx+padding,ry,power:backdropPower};compositions.set(scene,composition);return composition;
+}
 export function frameFor(scene,w,h,ratio=1){
  let cache=frames.get(scene);if(!cache){cache=new Map();frames.set(scene,cache);}
  const key=w+'x'+h+':'+ratio;if(cache.has(key))return cache.get(key);
- const b=scene.bounds,cx=b.x+b.w/2,cy=b.y+b.h/2,oval=ovalFor(w,h);
- // An ellipse narrows towards its ends. Fit every outline and ink point into
- // its inner 90%, so tall fins and long tails stay inside the ochre field too.
- let extent=0;
- const include=points=>{for(const [x,y]of points)extent=Math.max(extent,Math.hypot((x-cx)/oval.rx,(y-cy)/oval.ry));};
- for(const points of scene.polylines)include(points);
- for(const region of scene.regions)include(region.outline);
- const s=.90/Math.max(extent,1e-6),frame={s,x:oval.x-cx*s,y:oval.y-cy*s};
+ const c=compositionFor(scene),s=Math.min(Math.max(1,w/2-18*ratio)/c.rx,Math.max(1,h/2-16*ratio)/c.ry);
+ const frame={s,x:w/2-c.anchor.x*s,y:h/2-c.anchor.y*s,anchor:c.anchor,
+  backdrop:{x:.5,y:.5,rx:c.rx*s/w,ry:c.ry*s/h,power:c.power}};
  if(cache.size>=2)cache.delete(cache.keys().next().value);cache.set(key,frame);return frame;
 }
 function transform(x,f){x.setTransform(f.s,0,0,f.s,f.x,f.y);}
@@ -103,7 +121,7 @@ export function createPainter(){
    x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='destination-in';x.drawImage(mask,0,0,w,h);x.globalCompositeOperation='source-over';
    const ix=reset(ink,w,h);ix.drawImage(raw,0,0);ix.globalCompositeOperation='source-in';ix.fillStyle=`rgb(${palette.ink.join(',')})`;ix.fillRect(0,0,w,h);ix.globalCompositeOperation='source-over';
    const ox=reset(output,w,h);ox.drawImage(pigment,0,0);ox.drawImage(ink,0,0);
-   return{canvas:output,paintMs:performance.now()-started,inkCached};
+   return{canvas:output,backdrop:f.backdrop,paintMs:performance.now()-started,inkCached};
   }
  };
 }
@@ -125,7 +143,18 @@ export function createPaper(){
   const t=grain/100;
   if(last!==grain){for(let i=0;i<image.data.length;i+=4){for(let j=0;j<3;j++)image.data[i+j]=base[j]+(source.data[i+j]-base[j])*t;image.data[i+3]=255;}tx.putImageData(image,0,0);last=grain;}
   const x=target.getContext('2d',{willReadFrequently:true});x.setTransform(1,0,0,1,0,0);x.drawImage(tile,0,0,target.width,target.height);
-  const oval=ovalFor(target.width,target.height);x.save();x.beginPath();x.ellipse(oval.x,oval.y,oval.rx,oval.ry,0,0,Math.PI*2);x.clip();
-  x.drawImage(wash,oval.x-oval.rx,oval.y-oval.ry,oval.rx*2,oval.ry*2);x.restore();
+ },drawBackdrop(target,shape){
+  const w=target.width,h=target.height,x=reset(target,w,h,{willReadFrequently:true});if(!shape)return;
+  x.save();x.beginPath();
+  for(let i=0;i<=160;i++){
+   const t=i/160*Math.PI*2,c=Math.cos(t),s=Math.sin(t);
+   const px=(shape.x+shape.rx*Math.sign(c)*Math.pow(Math.abs(c),2/shape.power))*w;
+   const py=(shape.y+shape.ry*Math.sign(s)*Math.pow(Math.abs(s),2/shape.power))*h;
+   if(i===0)x.moveTo(px,py);else x.lineTo(px,py);
+  }
+  x.closePath();x.clip();
+  // Sample the same texture at the same paper coordinates when the mask
+  // changes, rather than stretching or reseeding it for each new fish.
+  x.drawImage(wash,0,0,w,h);x.restore();
  }};
 }
