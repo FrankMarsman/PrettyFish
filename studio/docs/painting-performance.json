@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-05",
+  "method": "Same browser, same Fast-generated region geometry, same 1200 × 720 size and palette. One warm-up per style, medians of three changing-anatomy paintings. Studio uses its cached texture and paper; original Pretty Fish recreates paper and filters every image. Geometry generation excluded; new ink masks are calculated for every sample.",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "results": [
+    {
+      "style": "Fine",
+      "prettyFishMs": 352.8,
+      "studioMs": 3.3,
+      "speedup": 106.91
+    },
+    {
+      "style": "Layered",
+      "prettyFishMs": 327.2,
+      "studioMs": 5.5,
+      "speedup": 59.49
+    },
+    {
+      "style": "Crosshatch",
+      "prettyFishMs": 344.7,
+      "studioMs": 3.9,
+      "speedup": 88.38
+    },
+    {
+      "style": "Linear",
+      "prettyFishMs": 343.7,
+      "studioMs": 3.4,
+      "speedup": 101.09
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+Pretty Fish Studio
+
+Fast fish anatomy: FrankFish Fast, by FrankMarsman, based on fishdraw.
+https://github.com/FrankMarsman/FrankFish
+Original fishdraw copyright (c) 2021 Lingdong Huang; MIT.
+Full license: frankfish.txt
+
+Painting primitives, paper and pigment transparency fields: adapted nonflowers.
+https://github.com/LingDong-/nonflowers
+Copyright (c) 2018 Lingdong Huang; MIT.
+Full license: nonflowers.txt
+
+The complete original copyright and permission notices are retained here.
+The Studio adapter, renderer, interface and tests are also MIT licensed.

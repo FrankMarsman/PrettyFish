@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-05",
+  "node": "v24.1.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "cpu": "Apple M1",
+  "method": "Isolated function closures on the same runtime, matching polylines, three warm-ups, medians of seven Fast and three original geometry generations. Painting and region adaptation excluded.",
+  "results": [
+    {
+      "scale": 0,
+      "style": "Fine",
+      "fastMs": 56.57,
+      "originalMs": 737.27,
+      "speedup": 13.03
+    },
+    {
+      "scale": 1,
+      "style": "Layered",
+      "fastMs": 31.96,
+      "originalMs": 478.76,
+      "speedup": 14.98
+    },
+    {
+      "scale": 2,
+      "style": "Crosshatch",
+      "fastMs": 15.31,
+      "originalMs": 183.18,
+      "speedup": 11.97
+    },
+    {
+      "scale": 3,
+      "style": "Linear",
+      "fastMs": 8.76,
+      "originalMs": 107.63,
+      "speedup": 12.29
+    }
+  ]
+}

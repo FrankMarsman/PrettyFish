@@ -18,6 +18,19 @@ browser library and adapts its coloured-ribbon approach to fishdraw's body
 boundaries. It does not generate a second fish, colour an unrelated silhouette,
 or apply an image-generation model.
 
+## Full-control interactive studio
+
+**[Open Pretty Fish Studio →](https://pretty-fish-studio.frankmarsman.chatgpt.site)**
+
+A painted-fish dashboard with **all 49 FrankFish shape controls**, plus palette,
+pigment and paper grain. The painted preview stays visible above the controls
+as you scroll. Shape changes use the **FrankFish Fast** generator; cached paper,
+pigment and ink keep editing responsive. Save PNGs or share all settings in a link.
+
+[![Pretty Fish Studio: painted fish above the full set of controls](studio/docs/studio-preview.jpg)](https://pretty-fish-studio.frankmarsman.chatgpt.site)
+
+[Studio source, setup and tests](studio/README.md) · [Performance and browser checks](studio/docs/ARCHITECTURE.md#verification)
+
 ## Example specimens
 
 [![Twelve painted fish across four palettes](samples/gallery.jpg)](samples/README.md#still-gallery)

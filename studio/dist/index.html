@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f2e9"><meta name="description" content="Shape an imaginary fish and paint it your way. All 49 FrankFish controls, with nonflowers colour, pigment and paper.">
+<title>Pretty Fish Studio — shape, colour &amp; paper</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script>
+</head>
+<body>
+<main>
+ <nav class="masthead" aria-label="Main navigation"><a class="wordmark" href="./"><span class="mark" aria-hidden="true">pf.</span><span>THE INTERACTIVE ATELIER</span></a><a href="https://github.com/FrankMarsman/PrettyFish" target="_blank" rel="noreferrer">PrettyFish repository <span aria-hidden="true">↗</span></a></nav>
+ <header class="intro"><div><p class="eyebrow">FORM, COLOUR &amp; A LITTLE IMAGINATION</p><h1>Pretty Fish <em>Studio.</em></h1></div><p>Shape a fish.<br>Paint it your way.</p></header>
+ <section class="preview" id="preview" aria-labelledby="painting-title">
+  <div class="preview-top"><div><span class="eyebrow">THE PAINTING</span><h2 id="painting-title">Aurelia elegans</h2></div><div class="render-status"><span class="status-dot" id="status-dot" aria-hidden="true"></span><span id="render-status" aria-hidden="true">Gathering ink &amp; pigment…</span><span class="timing" id="timing" title="Time from sending the last render request to displaying it"></span></div></div>
+  <div class="artboard" id="artboard" role="img" aria-label="An imaginary fish painted with fine ink and delicate colour on textured paper" aria-busy="true">
+   <canvas id="paper-canvas" aria-hidden="true"></canvas><div class="fish-view" id="fish-view"><canvas id="fish-canvas" aria-hidden="true"></canvas></div>
+  </div>
+  <div class="preview-bottom"><div class="view-tools" role="group" aria-label="Painting view"><button type="button" class="icon-button" id="zoom-out" aria-label="Zoom out">−</button><output id="zoom-value" aria-live="off">100%</output><button type="button" class="icon-button" id="zoom-in" aria-label="Zoom in">+</button><button type="button" class="text-button" id="fit">Fit</button><button type="button" class="text-button" id="fullscreen">Fullscreen <span aria-hidden="true">⤢</span></button></div><div class="preview-actions"><button type="button" class="text-button" id="share" disabled>Copy link <span aria-hidden="true">↗</span></button><button type="button" class="text-button" id="download" disabled>Save PNG <span aria-hidden="true">↓</span></button></div></div>
+ </section>
+ <p class="notice" id="notice" role="status" aria-live="polite"></p>
+ <section class="atelier" aria-label="Painting and shape controls">
+  <div class="section-heading"><h2>Your atelier</h2><div class="actions"><button type="button" class="button" id="reset" title="Restore all controls to their defaults, keeping the current seed">Reset</button><button type="button" class="button primary" id="new-fish" title="New proportions; keep your chosen styles and painting settings">New fish <span aria-hidden="true">↗</span></button></div></div>
+  <fieldset class="paint-controls"><legend>Colour &amp; paper</legend><div class="paint-grid"><label class="field"><span class="field-label">Palette</span><select id="palette"><option value="celadon">Celadon &amp; ochre</option><option value="vermilion">Vermilion &amp; gold</option><option value="indigo">Indigo &amp; pearl</option><option value="plum">Plum &amp; rose</option></select></label><label class="field"><span class="field-label">Pigment <output id="pigment-value" for="pigment">65%</output></span><input id="pigment" type="range" min="0" max="100" step="5" value="65"></label><label class="field"><span class="field-label">Paper grain <output id="grain-value" for="grain">45%</output></span><input id="grain" type="range" min="0" max="100" step="5" value="45"></label></div></fieldset>
+  <div class="control-toolbar"><div><h3>Shape &amp; details</h3><p id="control-count">49 controls · the painting stays in view</p></div><label class="search"><span class="sr-only">Find a shape control</span><input id="control-search" type="search" placeholder="Find a shape control…" autocomplete="off"></label></div>
+  <div class="control-groups" id="control-groups"></div>
+  <form class="seed-form" id="seed-form"><label for="seed">Specimen seed <span>Keep a fish, or discover another.</span></label><div><input id="seed" type="text" maxlength="120" required autocomplete="off" spellcheck="false"><button class="button" type="submit">Apply seed</button></div></form>
+ </section>
+ <footer><div><p class="footer-title">Fast forms. Delicate colour.</p><p>Geometry by <a href="https://github.com/FrankMarsman/FrankFish" target="_blank" rel="noreferrer">FrankFish Fast</a>, built on LingDong Huang’s fishdraw.<br>Painting routines adapted from his <a href="https://github.com/LingDong-/nonflowers" target="_blank" rel="noreferrer">nonflowers</a>. <a href="licenses/NOTICE.txt">Credits &amp; MIT licenses</a>.</p></div><p class="footer-note">No two alike.<br>None found in nature.</p></footer>
+</main><noscript>Please enable JavaScript to generate and paint your fish.</noscript>
+</body></html>
