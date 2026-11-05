@@ -35,3 +35,15 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+
+      - name: Verify painted head silhouette
+        run: |
+          node tools/serve.mjs > /tmp/pretty-fish-head-preview.log 2>&1 &
+          studio_preview_pid=$!
+          trap 'kill "$studio_preview_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:4184/ > /dev/null 2>&1; then break; fi
+            sleep 0.2
+          done
+          export CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium)"
+          npm run test:head

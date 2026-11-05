@@ -16,6 +16,14 @@ const clamp=v=>Math.max(0,Math.min(1,v));
 function path(x,points){x.beginPath();if(!points.length)return;x.moveTo(...points[0]);for(let i=1;i<points.length;i++)x.lineTo(...points[i]);x.closePath();}
 function bounds(points){let x=Infinity,y=Infinity,r=-Infinity,b=-Infinity;for(const p of points){x=Math.min(x,p[0]);y=Math.min(y,p[1]);r=Math.max(r,p[0]);b=Math.max(b,p[1]);}return{x,y,w:r-x,h:b-y};}
 function centre(points){return points.reduce((s,p)=>[s[0]+p[0]/points.length,s[1]+p[1]/points.length],[0,0]);}
+// The body envelope extends behind the head. Subtract the same extended head
+// mask used by FrankFish's ink clipping, including the empty area above its face.
+function excludeHead(x,body){
+ if(!body.headCutout?.length)return;
+ const b=bounds(body.outline);x.beginPath();x.rect(b.x-4,b.y-4,b.w+8,b.h+8);
+ const points=body.headCutout;x.moveTo(...points[0]);for(let i=1;i<points.length;i++)x.lineTo(...points[i]);x.closePath();
+ x.clip('evenodd');
+}
 export function frameFor(scene,w,h,ratio=1){const b=scene.bounds,s=Math.min((w-60*ratio)/b.w,(h-48*ratio)/b.h);return{s,x:(w-b.w*s)/2-b.x*s,y:(h-b.h*s)/2-b.y*s};}
 function transform(x,f){x.setTransform(f.s,0,0,f.s,f.x,f.y);}
 
@@ -28,7 +36,7 @@ function pigmentMask(nf){
 }
 function bodyWash(x,r,nf,palette,pigment){
  const top=r.top,bottom=r.bottom,rows=16;
- x.save();path(x,r.outline);x.clip();
+ x.save();path(x,r.outline);x.clip();excludeHead(x,r);
  for(let i=1;i<top.length;i++)for(let j=0;j<rows;j++){
   const u=j/rows,v=(j+1)/rows,t=(i-.5)/(top.length-1),m=(u+v)/2;
   const colour=m<.46?mix(palette.back,palette.middle,m/.46):mix(palette.middle,palette.belly,(m-.46)/.54);
@@ -67,7 +75,7 @@ export function createPainter(){
     raw=surface(w,h);const x=ctx(raw);transform(x,f);
     brush(x,scene.groups.shading,nf,.13,.18,f,ratio);brush(x,scene.groups.pattern,nf,.21,.21,f,ratio);
     brush(x,scene.groups.body,nf,.46,.27,f,ratio);brush(x,scene.groups.fins,nf,.53,.28,f,ratio);brush(x,scene.groups.head,nf,.64,.30,f,ratio);
-    for(const r of scene.regions)if(['body','fin'].includes(r.kind))nf.stroke({ctx:x,pts:r.kind==='body'?r.top:r.outline,col:'rgba(0,0,0,.25)',wid:t=>(.19*ratio/f.s)*(.5+.5*Math.sin(t*Math.PI))});
+    for(const r of scene.regions)if(['body','fin'].includes(r.kind)){x.save();if(r.kind==='body')excludeHead(x,r);nf.stroke({ctx:x,pts:r.kind==='body'?r.top:r.outline,col:'rgba(0,0,0,.25)',wid:t=>(.19*ratio/f.s)*(.5+.5*Math.sin(t*Math.PI))});x.restore();}
     if(inkCache.size>=2)inkCache.delete(inkCache.keys().next().value);inkCache.set(key,raw);
    }
    const x=reset(pigment,w,h);transform(x,f);x.lineWidth=.7*ratio/f.s;

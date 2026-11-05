@@ -1,0 +1,104 @@
+{
+  "seed": "Aurelia elegans-e11143",
+  "overrides": {
+    "body_length": 420,
+    "body_curve_amount": 0.5
+  },
+  "checks": "Transparent forehead and body-edge pixels; retained head/body pigment; worker and canvas fallback",
+  "results": [
+    {
+      "mode": "worker",
+      "forehead": [
+        {
+          "point": [
+            25,
+            120
+          ],
+          "alpha": 0
+        },
+        {
+          "point": [
+            35,
+            118
+          ],
+          "alpha": 0
+        },
+        {
+          "point": [
+            45,
+            112
+          ],
+          "alpha": 0
+        }
+      ],
+      "edge": {
+        "point": [
+          28.548387096774178,
+          113.9386027904138
+        ],
+        "alpha": 0
+      },
+      "head": {
+        "point": [
+          55,
+          150
+        ],
+        "alpha": 136
+      },
+      "body": {
+        "point": [
+          180,
+          145
+        ],
+        "alpha": 91
+      }
+    },
+    {
+      "mode": "main",
+      "forehead": [
+        {
+          "point": [
+            25,
+            120
+          ],
+          "alpha": 0
+        },
+        {
+          "point": [
+            35,
+            118
+          ],
+          "alpha": 0
+        },
+        {
+          "point": [
+            45,
+            112
+          ],
+          "alpha": 0
+        }
+      ],
+      "edge": {
+        "point": [
+          28.548387096774178,
+          113.9386027904138
+        ],
+        "alpha": 0
+      },
+      "head": {
+        "point": [
+          55,
+          150
+        ],
+        "alpha": 136
+      },
+      "body": {
+        "point": [
+          180,
+          145
+        ],
+        "alpha": 91
+      }
+    }
+  ]
+}

@@ -31,7 +31,10 @@ excluded from the deployed static directory.
 
 `fish(params, {regions: true})` returns the same polylines as upstream plus
 anatomical regions and grouped detail paths. `fish(params)` keeps the original
-flat-array API. Head fill geometry is captured separately from its clipping mask.
+flat-array API. Head fill geometry is captured separately from its clipping mask. The body also
+retains that extended head mask as a cutout. Both its colour wash and extra
+outline strokes subtract the cutout, so the generic body envelope cannot shade
+the empty area outside the forehead.
 The only correctness repair in the copied source is declaring the original
 `lip1s` local, allowing the generator to be scoped in strict mode.
 

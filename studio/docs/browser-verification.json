@@ -3,55 +3,23 @@
   "checks": "49 controls, rapid latest-wins input, four palettes, geometry/ink caches, independent fixed paper, search, sticky preview, zoom/pan/fullscreen, PNG export, complete state links, New fish style retention, reset, Unicode seeds and 320–1440px layouts",
   "drag": {
     "updates": 20,
-    "displayedFrames": 11,
-    "draftFrames": 10,
-    "medianUpdateMs": 36.70000000298023
+    "displayedFrames": 12,
+    "draftFrames": 11,
+    "medianUpdateMs": 34.79999999701977
   },
   "samples": [
     {
       "generationMs": 0,
-      "paintMs": 2.3999999910593033,
-      "latencyMs": 2.9000000059604645,
+      "paintMs": 1.0999999940395355,
+      "latencyMs": 1.2000000029802322,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 1.9000000059604645,
-      "latencyMs": 2.2000000029802322,
-      "quality": "draft",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 1.1000000089406967,
+      "paintMs": 1.2999999970197678,
       "latencyMs": 1.5,
-      "quality": "final",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 2.0999999940395355,
-      "latencyMs": 2.5,
-      "quality": "draft",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 1.1000000089406967,
-      "latencyMs": 1.1000000089406967,
-      "quality": "final",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 1.300000011920929,
-      "latencyMs": 1.4000000059604645,
       "quality": "draft",
       "geometryCached": true,
       "mode": "worker"
@@ -59,6 +27,22 @@
     {
       "generationMs": 0,
       "paintMs": 1.2000000029802322,
+      "latencyMs": 1.2000000029802322,
+      "quality": "final",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1.2000000029802322,
+      "latencyMs": 1.4000000059604645,
+      "quality": "draft",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1.0999999940395355,
       "latencyMs": 1.2999999970197678,
       "quality": "final",
       "geometryCached": true,
@@ -66,72 +50,88 @@
     },
     {
       "generationMs": 0,
-      "paintMs": 6.5999999940395355,
-      "latencyMs": 9.299999997019768,
+      "paintMs": 1.4000000059604645,
+      "latencyMs": 1.7000000029802322,
+      "quality": "draft",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1.4000000059604645,
+      "latencyMs": 1.7000000029802322,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 4,
-      "latencyMs": 6.300000011920929,
+      "paintMs": 1,
+      "latencyMs": 1.300000011920929,
+      "quality": "draft",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1,
+      "latencyMs": 1.2000000029802322,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
-      "generationMs": 39.79999999701977,
+      "generationMs": 0,
+      "paintMs": 4.200000002980232,
+      "latencyMs": 8.200000002980232,
+      "quality": "final",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
+      "paintMs": 1.300000011920929,
+      "latencyMs": 2.5999999940395355,
+      "quality": "final",
+      "geometryCached": true,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 16.69999998807907,
+      "paintMs": 4.100000008940697,
+      "latencyMs": 21.200000002980232,
+      "quality": "final",
+      "geometryCached": false,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 29.099999994039536,
+      "paintMs": 4.9000000059604645,
+      "latencyMs": 34.29999999701977,
+      "quality": "final",
+      "geometryCached": false,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 30.799999997019768,
+      "paintMs": 5.200000002980232,
+      "latencyMs": 36.29999999701977,
+      "quality": "final",
+      "geometryCached": false,
+      "mode": "worker"
+    },
+    {
+      "generationMs": 0,
       "paintMs": 5.5999999940395355,
-      "latencyMs": 45.900000005960464,
-      "quality": "final",
-      "geometryCached": false,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 47.69999998807907,
-      "paintMs": 9.800000011920929,
-      "latencyMs": 58,
-      "quality": "final",
-      "geometryCached": false,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 46.400000005960464,
-      "paintMs": 9.299999997019768,
-      "latencyMs": 56.900000005960464,
-      "quality": "final",
-      "geometryCached": false,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 18.400000005960464,
-      "latencyMs": 19.599999994039536,
+      "latencyMs": 6.4000000059604645,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"
     },
     {
       "generationMs": 0,
-      "paintMs": 11.599999994039536,
-      "latencyMs": 12.700000002980232,
-      "quality": "final",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 13.099999994039536,
-      "latencyMs": 15,
-      "quality": "final",
-      "geometryCached": true,
-      "mode": "worker"
-    },
-    {
-      "generationMs": 0,
-      "paintMs": 11.700000002980232,
-      "latencyMs": 13.299999997019768,
+      "paintMs": 7,
+      "latencyMs": 7.9000000059604645,
       "quality": "final",
       "geometryCached": true,
       "mode": "worker"

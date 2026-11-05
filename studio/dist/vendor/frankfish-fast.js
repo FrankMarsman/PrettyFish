@@ -2232,7 +2232,7 @@ function fish(arg, options = {}){
     region('anal','fin',c3,f3_curve),
     region('tail','fin',c4,f4_curve),
     ...(c5&&c5.length>2?[region('finlet','fin',c5,f5_curve)]:[]),
-    {...region('body','body',bodyRegion),top:curve0,bottom:curve1},
+    {...region('body','body',bodyRegion),top:curve0,bottom:curve1,headCutout:cf},
     region('pectoral','fin',c1,f1_curve),
     region('head','head',headParts.outline),
     region('jaw','jaw',headParts.jaw),

@@ -44,6 +44,8 @@ In another terminal:
 npm run check
 npm test
 npm run test:browser
+# Target just the forehead regression:
+npm run test:head
 ```
 
 Set `CHROME_PATH` if Chrome is installed somewhere other than the default macOS
@@ -59,8 +61,8 @@ pigment transparency and paper each have separate caches.
 
 Local Apple M1 / Node.js 24.1.0 measurements gave **12–15× faster geometry** than
 the original generator across the four scale styles, with matching polylines.
-The final browser drag check displayed **11 frames from 20 input events**,
-with a **36.7 ms median dispatch-to-display time**. Queue wait and
+The final browser drag check displayed **12 frames from 20 input events**,
+with a **34.8 ms median dispatch-to-display time**. Queue wait and
 the final-render debounce are excluded. Performance varies by fish and device.
 
 [Generation measurements](docs/generation-performance.json) ·

@@ -46,3 +46,17 @@ test('combined extreme settings and mixed random profiles keep every region fini
   assert.ok(scene.regions.every(r=>r.outline.every(p=>p.every(Number.isFinite))),'regions '+i);
  }
 });
+test('the reported long-bodied fish retains a head cutout for its body envelope',async()=>{
+ await ready;
+ const params={...normalise(api.paramsForSeed('Aurelia elegans-e11143')),body_length:420,body_curve_amount:.5};
+ const scene=api.sceneFor('Aurelia elegans-e11143',params),body=scene.regions.find(r=>r.id==='body'),head=scene.regions.find(r=>r.id==='head');
+ const inside=([x,y],poly)=>{let result=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])result=!result;}return result;};
+ assert.ok(body.headCutout?.length>3);
+ assert.ok(body.headCutout.every(p=>p.every(Number.isFinite)));
+ for(const point of [[25,120],[35,118],[45,112]]){
+  assert.ok(inside(point,body.outline),'regression point is inside the old body envelope');
+  assert.equal(inside(point,head.outline),false,'regression point is outside the actual head');
+  assert.ok(inside(point,body.headCutout),'the cutout removes the overhanging envelope');
+ }
+ assert.equal(inside([180,145],body.headCutout),false,'actual torso is retained');
+});

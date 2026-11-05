@@ -8,8 +8,9 @@
     "dev":"node tools/serve.mjs",
     "check":"node tools/check.mjs",
     "test":"node --test tests/*.test.cjs",
-    "test:browser":"node tools/browser-check.cjs",
-    "benchmark":"node tools/benchmark.cjs"
+    "test:browser":"node tools/head-clipping-check.cjs && node tools/browser-check.cjs",
+    "benchmark":"node tools/benchmark.cjs",
+    "test:head":"node tools/head-clipping-check.cjs"
   },
   "license":"MIT",
   "devDependencies":{"@playwright/test":"1.56.1"}
