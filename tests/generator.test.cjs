@@ -1,7 +1,10 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const crypto=require('node:crypto');
-const fixtures=require('./upstream-fixtures.json');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const path=require('node:path');
+const upstream=fs.readFileSync(path.join(__dirname,'fixtures/fishdraw-upstream.js'),'utf8');
 const randomBefore=Math.random;
 const prototypeBefore=Object.getOwnPropertyNames(Array.prototype);
 require('../dist/vendor/fishdraw.js');
@@ -9,10 +12,13 @@ require('../dist/vendor/nonflowers.js');
 const digest=value=>crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
 test('region extraction preserves the original fishdraw line art',()=>{
-  for(const fixture of fixtures) {
-    const scene=FishDraw.createScene(fixture.seed);
-    assert.equal(scene.polylines.length,fixture.lines,fixture.seed);
-    assert.equal(digest(scene.polylines),fixture.sha256,fixture.seed);
+  for(const seed of ['Nerina lucens','Pretty fish','1234']) {
+    const context={module:{exports:{}},require:{main:null},seed};
+    vm.createContext(context);vm.runInContext(upstream,context);
+    const original=vm.runInContext('jsr=str_to_seed(seed);perlin=undefined;fish(generate_params())',context);
+    const scene=FishDraw.createScene(seed);
+    assert.equal(scene.polylines.length,original.length,seed);
+    assert.equal(digest(scene.polylines),digest(original),seed);
   }
 });
 

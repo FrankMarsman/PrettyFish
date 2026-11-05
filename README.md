@@ -23,7 +23,9 @@ or apply an image-generation model.
 Generate a fish, choose one of four palettes, adjust pigment and paper grain,
 or turn on **Show regions** to inspect the anatomy. Download the drawing as SVG
 or the painting as PNG. **Copy specimen link** saves the seed, palette and texture
-settings so the same fish can be revisited.
+settings so the same fish can be revisited. Fine clipping and rasterization
+details can differ between browser engines; reproducibility is tested within
+the same engine.
 
 The app is a static page with no runtime dependencies, CDN requests, API keys,
 accounts or build step. All artwork is generated in the visitor's browser.

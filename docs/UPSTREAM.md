@@ -29,8 +29,11 @@ Changes:
   The optional overrides object accepts original fishdraw parameters; the page
   uses the random defaults. Tests use overrides to exercise every scale and tail.
 - Original noise, shape construction, clipping and line work remain intact.
-  Fixtures computed with unmodified upstream source verify identical polylines
-  for three reference seeds.
+  Tests execute the unmodified upstream fixture in a separate VM and verify
+  identical polylines for three reference seeds on the same runtime. The fixture
+  is kept in `tests/fixtures/fishdraw-upstream.js`; its source is unchanged.
+  Comparing within one runtime avoids platform-specific floating-point clipping
+  differences being mistaken for changes to the generator.
 
 ## nonflowers
 

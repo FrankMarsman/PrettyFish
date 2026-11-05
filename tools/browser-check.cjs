@@ -20,8 +20,9 @@ async function change(page,id,value){
   await fs.mkdir('artifacts',{recursive:true});
   const browser=await chromium.launch({executablePath:chrome,headless:true});
   const errors=[];
+  let context;
   try {
-    const context=await browser.newContext({viewport:{width:1440,height:1100},acceptDownloads:true,permissions:['clipboard-read','clipboard-write']});
+    context=await browser.newContext({viewport:{width:1440,height:1100},acceptDownloads:true,permissions:['clipboard-read','clipboard-write']});
     const page=await context.newPage();
     page.on('pageerror',e=>errors.push(e.message));
     page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
@@ -81,5 +82,8 @@ async function change(page,id,value){
     assert.deepEqual(await fs.readFile('artifacts/painting-with-inspector.png'),pngData,'PNG export must exclude region overlay');
     assert.deepEqual(errors,[],'no browser errors');
     console.log('Browser checks passed: both renderers, four palettes, pigment/grain, region inspection, exact shared-seed replay, new fish, seed form, SVG/PNG exports, and 320–1440px layouts.');
-  } finally {await browser.close();}
+  } finally {
+    if(context) await context.close();
+    await browser.close();
+  }
 })().catch(e=>{console.error(e);process.exitCode=1;});
