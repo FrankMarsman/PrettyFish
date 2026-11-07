@@ -31,6 +31,39 @@ pigment and ink keep editing responsive. Save PNGs or share all settings in a li
 
 [Studio source, setup and tests](studio/README.md) · [Performance and browser checks](studio/docs/ARCHITECTURE.md#verification)
 
+## The 3D aquarium
+
+**[Open Pretty Fish Aquarium →](https://pretty-fish-aquarium.frankmarsman.chatgpt.site)**
+
+Pretty Fish also has a 3D aquarium: painted fish with rounded bodies, flexible
+spines and moving fins, swimming toward the glass and back into the distance.
+These recordings show each lighting setting with **18 and 36 fish**.
+
+### Daylight
+
+<p>
+<a href="samples/aquarium/daylight-18.gif"><img src="samples/aquarium/daylight-18.gif" alt="Daylight aquarium with 18 textured 3D fish" width="48%"></a>
+<a href="samples/aquarium/daylight-36.gif"><img src="samples/aquarium/daylight-36.gif" alt="Daylight aquarium with 36 textured 3D fish" width="48%"></a>
+</p>
+
+### The deep
+
+Fish emerge into the foreground light and disappear into dark water.
+
+<p>
+<a href="samples/aquarium/the-deep-18.gif"><img src="samples/aquarium/the-deep-18.gif" alt="18 painted fish emerging from the dark aquarium depths" width="48%"></a>
+<a href="samples/aquarium/the-deep-36.gif"><img src="samples/aquarium/the-deep-36.gif" alt="36 painted fish moving between foreground light and darkness" width="48%"></a>
+</p>
+
+### Moon pool
+
+<p>
+<a href="samples/aquarium/moon-pool-18.gif"><img src="samples/aquarium/moon-pool-18.gif" alt="18 textured fish swimming in cool moonlit water" width="48%"></a>
+<a href="samples/aquarium/moon-pool-36.gif"><img src="samples/aquarium/moon-pool-36.gif" alt="36 textured fish in the Moon pool aquarium" width="48%"></a>
+</p>
+
+[Watch the longer video versions and see recording details →](samples/aquarium/README.md)
+
 ## Example specimens
 
 [![Twelve painted fish across four palettes](samples/gallery.jpg)](samples/README.md#still-gallery)
